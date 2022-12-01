@@ -28,7 +28,7 @@ app.post('/passwd', (req, res) => {
   res.json(passwdValidade(req.body));
 });
 
-app.get("/status",(res)=>{
+app.get("/status",(req, res)=>{
   res.json(status())
 })
 
