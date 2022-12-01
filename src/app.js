@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { getTimer, iniciar, passwdValidade } = require('./controller');
+const { getTimer, iniciar, passwdValidade, status } = require('./controller');
 const app = express();
 const port = 3000;
 
@@ -27,6 +27,10 @@ app.post('/init', (req, res) => {
 app.post('/passwd', (req, res) => {
   res.json(passwdValidade(req.body));
 });
+
+app.get("/status",(res)=>{
+  res.json(status())
+})
 
 app.listen(port, () => {
   console.log(`Running in http://localhost:${port}`);

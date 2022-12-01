@@ -1,5 +1,4 @@
 require('dotenv').config();
-const { uuid } = require('uuidv4');
 
 const users = JSON.parse(process.env.USERS);
 let winner;
@@ -35,15 +34,14 @@ function horas() {
 }
 
 function iniciar() {
-  if(winner) return {msg: "Já existe um ganhador!"}
+  if (winner) return { msg: 'Já existe um ganhador!' };
   active = true;
 
   clearInterval(INTERVALO);
   INTERVALO = setInterval(() => {
-    console.log({ hour, minNum, segNum, users });
     segundos();
   }, 1000);
-  return {msg: "Timer Iniciado"}
+  return { msg: 'Timer Iniciado' };
 }
 
 function getTimer() {
@@ -54,7 +52,7 @@ function getTimer() {
 
 function passwdValidade({ id, passwd }) {
   if (!active) return { sucess: false, msg: 'Não é possível fazer tentativas!! Timer Parado!' };
-  
+
   const user = users.find((user) => user.id === id);
   if (!user) return { sucess: false, msg: 'Usuário não encontrado' };
 
@@ -71,4 +69,8 @@ function passwdValidade({ id, passwd }) {
   return { sucess: false, msg: 'Você não possui mais tentativas!!' };
 }
 
-module.exports = { iniciar, getTimer, passwdValidade };
+function status() {
+  return { users, winner };
+}
+
+module.exports = { iniciar, getTimer, passwdValidade, status };
