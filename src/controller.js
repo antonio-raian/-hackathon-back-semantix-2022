@@ -5,8 +5,8 @@ let winner;
 
 let active = false;
 let segNum = 00;
-let minNum = 00;
-let hour = 01;
+let minNum = Number(process.env.MINUTES)
+let hour = Number(process.env.HOURS)
 let INTERVALO;
 
 function segundos() {
@@ -29,7 +29,7 @@ function minutos() {
 
 function horas() {
   hour--;
-  hour < 0 && clearInterval(INTERVALO);
+  if(hour < 0) { clearInterval(INTERVALO);(active=false)};
   return hour;
 }
 
