@@ -57,13 +57,13 @@ function passwdValidade({ id, passwd }) {
   if (!user) return { sucess: false, msg: 'Usuário não encontrado' };
 
   if (user?.attempts < 3) {
+    user.attempts += 1;
     if (process.env.SENHA === passwd) {
       clearInterval(INTERVALO);
       active = false;
       winner = user;
       return { success: true, user };
     }
-    user.attempts += 1;
     return { sucess: false, msg: `Você já usou ${user.attempts} de 3 tentativas!!` };
   }
   return { sucess: false, msg: 'Você não possui mais tentativas!!' };
